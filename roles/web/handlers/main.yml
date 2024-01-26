@@ -1,0 +1,15 @@
+---
+
+- name: Restart service
+  listen:
+      - restart dictionary service
+  ansible.builtin.systemd:
+      name: dictionary.service
+      state: restarted
+
+- name: Restart nginx service
+  listen:
+      - restart dictionary nginx service
+  ansible.builtin.systemd:
+      name: nginx.service
+      state: restarted

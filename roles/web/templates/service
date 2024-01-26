@@ -1,0 +1,16 @@
+[Unit]
+Description=dictionary service
+After=network-online.target
+
+[Service]
+User=peter
+Group=peter
+WorkingDirectory=/opt/dictionary/web
+ExecStart=/opt/dictionary/web/var/venv/bin/uvicorn --port {{ dictionary_web_port }} project.asgi:application
+ExecStartPost=/opt/dictionary/web/project/await.bash {{ dictionary_web_port }}
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+SyslogIdentifier=dictionary
+
+[Install]
+WantedBy=multi-user.target

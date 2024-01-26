@@ -1,0 +1,12 @@
+---
+- name: Deploy dictionary
+  hosts: 127.0.0.1
+  connection: local
+  become: false
+  gather_facts: false
+  vars:
+      dictionary_web_repo: https://github.com/tessercat/dict-web.git
+      dictionary_web_version: dev
+      dictionary_web_port: 8300
+  roles:
+      - {role: web, tags: [web]}
